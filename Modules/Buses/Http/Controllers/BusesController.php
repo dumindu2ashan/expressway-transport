@@ -5,16 +5,27 @@ namespace Modules\Buses\Http\Controllers;
 use Illuminate\Contracts\Support\Renderable;
 use Illuminate\Http\Request;
 use Illuminate\Routing\Controller;
+use Illuminate\Support\Facades\Bus;
+use Modules\Buses\Entities\Buses;
+use Modules\Buses\Http\Requests\BusUpdateRequest;
+use Modules\Buses\Http\Requests\ChangeStatusRequest;
+use Modules\Buses\Repositories\busInterface;
 
 class BusesController extends Controller
 {
+    public function __construct(busInterface $bus)
+    {
+        $this->bus=$bus;
+    }
+
     /**
      * Display a listing of the resource.
      * @return Renderable
      */
     public function index()
     {
-        return view('buses::index');
+        $buses = $this->bus->getAll();
+        return view('buses::index',compact('buses'));
     }
 
     /**
@@ -33,7 +44,14 @@ class BusesController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $data = $this->bus->store($request);
+        if($data['code'] == 1) {
+            return redirect('buses/list')->with(['success' => true,
+                'success' => 'Bus created Successfully!']);
+        }else{
+            return redirect('buses/list')->with(['errors' => true,
+                'error' => $data['msg']]);
+        }
     }
 
     /**
@@ -53,7 +71,8 @@ class BusesController extends Controller
      */
     public function edit($id)
     {
-        return view('buses::edit');
+        $bus = $this->bus->findById($id);
+        return view('buses::edit',compact('bus'));
     }
 
     /**
@@ -62,9 +81,17 @@ class BusesController extends Controller
      * @param int $id
      * @return Renderable
      */
-    public function update(Request $request, $id)
+    public function update(BusUpdateRequest $request)
     {
-        //
+        $id = $request->id;
+        $data = $this->bus->update($id,$request);
+        if($data['code'] == 1) {
+            return redirect('buses/list')->with(['success' => true,
+                'success' => 'Bus Updated Successfully!']);
+        }else{
+            return redirect('buses/list')->with(['errors' => true,
+                'error' => $data['msg']]);
+        }
     }
 
     /**
@@ -75,5 +102,17 @@ class BusesController extends Controller
     public function destroy($id)
     {
         //
+    }
+
+    public function changeStatus(ChangeStatusRequest $request){
+        $data = $this->bus->changeStatus($request->bus_id,$request->status);
+
+        if($data['code'] == 1) {
+            return redirect('buses/list')->with(['success' => true,
+                'success' => 'User status changed Successfully!']);
+        }else{
+            return redirect('buses/list')->with(['errors' => true,
+                'error' => $data['msg']]);
+        }
     }
 }

@@ -179,6 +179,7 @@ return [
          * repository Providers...
          */
         App\Providers\UserServiceProvider::class,
+        App\Providers\BusServiceProvider::class,
     ],
 
     /*
