@@ -11,7 +11,7 @@
 |
 */
 
-Route::prefix('users')->group(function() {
+Route::group(['prefix' => 'users', 'middleware' => ['auth', 'adminAccess']], function () {
     Route::get('/list', 'UsersController@index')->name('user.list');
     Route::get('/edit/{id}', 'UsersController@edit')->name('user.edit');
 
