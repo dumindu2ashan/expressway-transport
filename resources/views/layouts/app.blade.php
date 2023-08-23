@@ -15,7 +15,7 @@
     <!-- Fonts -->
     <link rel="dns-prefetch" href="//fonts.gstatic.com">
     <link href="https://fonts.googleapis.com/css?family=Nunito" rel="stylesheet">
-
+    @yield('css')
     <!-- Styles -->
     <link href="{{ asset('css/app.css') }}" rel="stylesheet">
 </head>
@@ -23,7 +23,7 @@
     <div id="app">
         <nav class="navbar navbar-expand-md navbar-light bg-white shadow-sm">
             <div class="container">
-                <a class="navbar-brand" href="{{ url('/') }}">
+                <a class="navbar-brand" href="{{ url('/home') }}">
                     {{ config('app.name', 'Laravel') }}
                 </a>
                 <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="{{ __('Toggle navigation') }}">
@@ -43,6 +43,9 @@
                                 </a>
                                 <a class="dropdown-item" href="{{ route('register') }}">
                                     Register user
+                                </a>
+                                <a class="dropdown-item" href="{{ route('password.request') }}">
+                                    Rest Password
                                 </a>
                             </div>
                         </li>
@@ -82,8 +85,16 @@
         </nav>
 
         <main class="py-4">
+            @if(session()->has('success'))
+                <div class="container">
+                <div class="alert alert-success" role="alert">
+                    {{ session()->get('success') }}
+                </div>
+                </div>
+            @endif
             @yield('content')
         </main>
     </div>
+@yield('js')
 </body>
 </html>

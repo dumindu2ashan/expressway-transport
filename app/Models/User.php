@@ -51,4 +51,27 @@ class User extends Authenticatable
     protected $casts = [
         'email_verified_at' => 'datetime',
     ];
+
+    public function getTypeStringAttribute()
+    {
+        switch ($this->type) {
+            case User::USER_TYPE_IT_ADMIN:
+                return 'IT Admin';
+            case User::USER_TYPE_OWNER:
+                return 'Owner';
+            case User::USER_TYPE_MANAGER:
+                return 'Manager';
+            case User::USER_TYPE_USER:
+                return 'User';
+        }
+    }
+
+    public function getStatusStringAttribute(){
+        switch ($this->status) {
+            case User::USER_STATUS_ACTIVE:
+                return 'Active';
+            case User::USER_STATUS_DEACTIVE:
+                return 'Deactive';
+        }
+    }
 }
