@@ -12,6 +12,13 @@ class User extends Authenticatable
 {
     use HasApiTokens, HasFactory, Notifiable;
 
+    const USER_TYPE_IT_ADMIN = 1;
+    const USER_TYPE_OWNER = 2;
+    const USER_TYPE_MANAGER = 3;
+    const USER_TYPE_USER = 4;
+
+    const USER_STATUS_ACTIVE = 1;
+    const USER_STATUS_DEACTIVE = 0;
     /**
      * The attributes that are mass assignable.
      *
@@ -21,6 +28,8 @@ class User extends Authenticatable
         'name',
         'email',
         'password',
+        'type',
+        'status'
     ];
 
     /**
@@ -31,6 +40,7 @@ class User extends Authenticatable
     protected $hidden = [
         'password',
         'remember_token',
+        'type'
     ];
 
     /**
