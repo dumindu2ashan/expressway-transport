@@ -73,4 +73,11 @@ class busRepository implements busInterface
             return $response;
         }
     }
+
+    public function getTypes()
+    {
+        return Buses::select('type')->groupBy('type')->where('status',1)->pluck('type');
+    }
+
+
 }

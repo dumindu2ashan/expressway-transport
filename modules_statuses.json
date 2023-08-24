@@ -1,5 +1,6 @@
 {
     "Buses": true,
     "Users": true,
-    "Routes": true
+    "Routes": true,
+    "Schedules": true
 }
