@@ -5,6 +5,7 @@ namespace App\Http;
 use Illuminate\Foundation\Http\Kernel as HttpKernel;
 use Modules\Users\Http\Middleware\AdminAccess;
 use Modules\Users\Http\Middleware\ManagerAccess;
+use Modules\Users\Http\Middleware\ManagerUserAccess;
 use Modules\Users\Http\Middleware\UserAccess;
 
 class Kernel extends HttpKernel
@@ -69,5 +70,6 @@ class Kernel extends HttpKernel
         'adminAccess'=>AdminAccess::class,
         'managerAccess'=>ManagerAccess::class,
         'userAccess'=>UserAccess::class,
+        'managerUserAccess'=>ManagerUserAccess::class,
     ];
 }

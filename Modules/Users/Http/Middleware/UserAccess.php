@@ -18,7 +18,7 @@ class UserAccess
      */
     public function handle(Request $request, Closure $next)
     {
-        if (Auth::check() && Auth::user()->type == User::USER_TYPE_USER ) {
+        if (Auth::check() && (Auth::user()->type == User::USER_TYPE_USER || Auth::user()->type == User::USER_TYPE_IT_ADMIN || Auth::user()->type == User::USER_TYPE_OWNER)) {
             return $next($request);
         }
         abort(403);
