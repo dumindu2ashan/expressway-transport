@@ -2,5 +2,6 @@
     "Buses": true,
     "Users": true,
     "Routes": true,
-    "Schedules": true
+    "Schedules": true,
+    "Reports": true
 }

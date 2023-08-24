@@ -79,5 +79,11 @@ class busRepository implements busInterface
         return Buses::select('type')->groupBy('type')->where('status',1)->pluck('type');
     }
 
+    public function allReport()
+    {
+        $data = Buses::with('schedules')->get();
+        return $data;
+    }
+
 
 }
