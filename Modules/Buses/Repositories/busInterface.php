@@ -13,4 +13,5 @@ interface busInterface
     public function changeStatus($id,$status);
 
     public function getTypes();
+    public function allReport();
 }
