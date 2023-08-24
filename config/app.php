@@ -181,6 +181,7 @@ return [
         App\Providers\UserServiceProvider::class,
         App\Providers\BusServiceProvider::class,
         App\Providers\RoutesServiceProvider::class,
+        App\Providers\ScheduleServiceProvider::class,
     ],
 
     /*

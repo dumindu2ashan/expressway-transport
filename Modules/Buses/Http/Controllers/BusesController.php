@@ -7,6 +7,7 @@ use Illuminate\Http\Request;
 use Illuminate\Routing\Controller;
 use Illuminate\Support\Facades\Bus;
 use Modules\Buses\Entities\Buses;
+use Modules\Buses\Http\Requests\BusCreateRequest;
 use Modules\Buses\Http\Requests\BusUpdateRequest;
 use Modules\Buses\Http\Requests\ChangeStatusRequest;
 use Modules\Buses\Repositories\busInterface;
@@ -42,7 +43,7 @@ class BusesController extends Controller
      * @param Request $request
      * @return Renderable
      */
-    public function store(Request $request)
+    public function store(BusCreateRequest $request)
     {
         $data = $this->bus->store($request);
         if($data['code'] == 1) {

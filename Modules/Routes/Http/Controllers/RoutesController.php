@@ -87,7 +87,7 @@ class RoutesController extends Controller
         $data = $this->route->update($id,$request);
         if($data['code'] == 1) {
             return redirect('route/list')->with(['success' => true,
-                'success' => 'Bus Updated Successfully!']);
+                'success' => 'Route Updated Successfully!']);
         }else{
             return redirect('route/list')->with(['errors' => true,
                 'error' => $data['msg']]);
